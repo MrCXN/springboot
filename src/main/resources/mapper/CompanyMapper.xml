@@ -5,15 +5,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--公司 -->
 <mapper namespace="com.lzy.parttime.dao.CompanyDao">
 	<!-- 公司列表 -->
-	<select id="getCompanyList" resultType="company">
-	SELECT
-		c.id,
-		c. NAME,
-		c.addTime,
-		c.introduce
-	FROM
-		`company` c
-	WHERE
-		c.delFlag = 0;
+	<select id="getCompanyList" parameterType="map" resultType="company">
+		SELECT
+			c.id,
+			c.`name`,
+			c.addTime,
+			c.introduce,
+			c.type
+		FROM
+			`company` c
+		WHERE
+		<include refid="getCompanyListCon" />
+		ORDER BY
+			c.id DESC
+		LIMIT #{pageIndex},#{pageSize}
+	</select>
+	
+	
+	<!-- 公司列表数 -->
+	<select id="getCompanyListCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			company c
+		WHERE
+		<include refid="getCompanyListCon" />
+	</select>
+	
+	<sql id="getCompanyListCon">
+				c.delFlag = 0
+		<if test="name!=''">
+			AND 
+				c.`name` like '%${name}%'
+		</if>
+		<if test="addTime!=''">
+			AND 
+				c.`addTime`like '${addTime}%'
+		</if>
+	</sql>
+	
+	
+	<insert id="insertCompany" parameterType="map">
+		INSERT INTO company (
+			NAME,
+			addtime,
+			introduce,
+			type,
+			imgUrl
+		)
+		VALUES
+			(
+				#{name},
+				#{addTime},
+				#{introduce},
+				#{type},
+				#{imgUrl}
+			)
+	</insert>
+	
+	<update id="delCompanyById" parameterType="map">
+		UPDATE company
+		SET delFlag = 1
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 通过id查询公司 -->
+	<select id="getCompanyById" parameterType="map" resultType="company">
+		SELECT
+			NAME,
+			introduce,
+			type,
+			imgUrl
+		FROM
+			company c
+		WHERE
+			c.id=#{id}
 	</select>
 </mapper>

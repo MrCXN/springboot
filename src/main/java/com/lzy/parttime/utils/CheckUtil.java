@@ -9,10 +9,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -45,8 +47,8 @@ public class CheckUtil {
 	/**
 	 * 方法描述
 	 * 
-	 * @param mav
-	 *            返回ModelAndView
+	 * @param map
+	 *            返回Map<String, Object>
 	 * @param code
 	 *            返回代码
 	 * @param msg
@@ -56,13 +58,12 @@ public class CheckUtil {
 	 * @return
 	 * @变更记录 2014-12-4 上午9:38:23 陈阳 创建
 	 */
-	public static ModelAndView returnResult(ModelAndView mav, int code,
+	public static Map<String, Object> returnResult(Map<String, Object> map, int code,
 			String msg, Object data) {
-
-		mav.addObject("code", code);
-		mav.addObject("msg", msg);
-		mav.addObject("data", data);
-		return mav;
+		map.put("code", code);
+		map.put("msg", msg);
+		map.put("data", data);
+		return map;
 	}
 
 	/**

@@ -1,4 +1,5 @@
 var form;
+var flag=-1;
 layui.config({
 	base : 'js',
 	version : new Date().getTime()
@@ -13,15 +14,18 @@ layui.config({
 	//登录
 	form.on('submit(login)', function(data) {
 		 if(loginFlag){
-			 $.post("../login/doLogin.do",{
-				 userAccount:userName,
-				 pwd:pwd
+			 $.post("doLogin",{
+				 userAccount:data.field.userAccount,
+				 pwd:data.field.pwd
 			 },function(data){
 				 var code =  data.code;
 				 if(code!=1000){
 					 layer.msg(data.msg);
 				 }else{
-					 location.href = "../login/index.do";
+					 if(flag==1){
+						 saveLocal($);
+					 }
+					 location.href = "index";
 				 }
 			 },"json");
 		 }
@@ -31,12 +35,7 @@ layui.config({
 	//记住帐号
 	form.on('switch(switcher)', function(data) {
 		 flag=-flag;
-		 if(flag==1){
-			 rememberMe=true;
-			 saveLocal($);
-		 }else{
-			 rememberMe=false;
-			 $("#userName").val("");
+		 if(flag==-1){
 			 localStorage.setItem("userAccount","");
 		 }
 		return false;
@@ -53,10 +52,10 @@ function local($,layui) {
 		 flag=-flag;
 		$("#rememberMe").attr("checked", "checked");
 		layui.form().render('checkbox');
-		$("#userName").val(userAccount);
+		$("#userAccount").val(userAccount);
 	} else {
 		$("#rememberMe").attr("checked", false);
-		$("#userName").val("");
+		$("#userAccount").val("");
 	}
 }
 
@@ -66,12 +65,6 @@ function local($,layui) {
  * @param $ : jquery
  */
 function saveLocal($) {
-	var userAccount = $("#userName").val();
+	var userAccount = $("#userAccount").val();
 	localStorage.setItem("userAccount", userAccount);
-	if (rememberMe){
-		localStorage.setItem("pwd", pwd);
-	}// 如果勾选了保存密码
-	else{
-		localStorage.setItem("pwd", "");
-	}
 }

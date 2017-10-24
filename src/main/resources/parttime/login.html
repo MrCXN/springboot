@@ -17,13 +17,13 @@
 				<h1>后台登录</h1>
 			</header>
 			<div class="beg-login-main">
-				<form  method="post" class="layui-form">
+				<form class="layui-form">
 					<input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" ></input>
 					<div class="layui-form-item">
 						<label class="beg-login-icon">
                         <i class="layui-icon">&#xe612;</i>
                     </label>
-						<input type="text" name="userNm" lay-verify="required" autocomplete="off" placeholder="这里输入登录名" class="layui-input"></input>
+						<input type="text" id="userAccount" name="userAccount" lay-verify="required" autocomplete="off" placeholder="这里输入登录名" class="layui-input"></input>
 					</div>
 					<div class="layui-form-item">
 						<label class="beg-login-icon">
@@ -34,7 +34,7 @@
 					<div class="layui-form-item">
 						<div class="beg-pull-left beg-login-remember">
 							<label>记住帐号？</label>
-							<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" checked="checked" title="记住帐号"></input>
+							<input type="checkbox" id="rememberMe" name="rememberMe" value="true" lay-skin="switch" lay-filter="switcher" title="记住帐号"></input>
 						</div>
 						<div class="beg-pull-right">
 							<button class="layui-btn layui-btn-primary"  lay-submit="" lay-filter="login">
