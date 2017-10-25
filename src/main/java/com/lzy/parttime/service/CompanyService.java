@@ -53,4 +53,13 @@ public interface CompanyService {
 	 */
 	Result getCompanyById(Integer id);
 
+	/**
+	 * 
+	 * @TODO: [编辑公司]
+	 * @param company
+	 * @return: 
+	 * @createTime:2017年10月25日下午7:00:33
+	 */
+	Result editCompanyById(Company company);
+
 }

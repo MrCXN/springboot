@@ -82,4 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			c.id=#{id}
 	</select>
+	
+	<!-- 编辑公司 -->
+	<update id="updateCompanyById" parameterType="map">
+		UPDATE company
+		SET name = #{name},introduce = #{introduce},type = #{type},imgUrl = #{imgUrl}
+		WHERE
+			id = #{id}
+	</update>
+	
 </mapper>

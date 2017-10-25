@@ -109,4 +109,19 @@ public class CompanyController {
 		Result result = companyService.delCompanyById(id);
 		return CheckUtil.returnResult(map,result.getCode(), result.getMsg(), "");
 	}
+	
+	/**
+	 * 
+	 * @TODO: [编辑公司]
+	 * @param company
+	 * @return: 
+	 * @createTime:2017年10月24日下午8:04:45
+	 */
+	@RequestMapping(value = "/editCompanyById" )
+	public @ResponseBody Map<String, Object> editCompanyById(Company company){
+		Map<String, Object> map = new HashMap<>();
+		Result result = companyService.editCompanyById(company);
+		return CheckUtil.returnResult(map,result.getCode(), result.getMsg(), "");
+	}
+	
 }

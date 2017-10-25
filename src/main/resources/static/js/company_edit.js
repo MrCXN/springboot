@@ -42,18 +42,16 @@ layui.config({
 		
 		//提交
 		form.on('submit(submit)', function(data){
-			var name = $("#centerNm").val();
-			var provinceId = $("#province").val();
-			var cityId = $("#city").val();
-			var districtId = $("#district").val();
-			var principalId = $("#principal").val();
-			$.post('../center/editCenterById.do',{
+			var name = data.field.name;
+			var type = data.field.type;
+			var introduce = data.field.introduce;
+			var imgUrl = data.field.imgUrl;
+			$.post('../company/editCompanyById',{
 				id:id,
 				name:name,
-				provinceId:provinceId,
-				cityId:cityId,
-				districtId:districtId,
-				principalId:principalId
+				type:type,
+				introduce:introduce,
+				imgUrl:imgUrl
 			},function(data){
 				var code = data.code;
 				if(code==1000){

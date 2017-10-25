@@ -143,5 +143,34 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return result;
 	}
+
+	/*
+	 * @TODO: [编辑公司]
+	 * @下午7:01:06
+	 * @see com.lzy.parttime.service.CompanyService#editCompanyById(com.lzy.parttime.entity.Company)
+	 */
+	@Override
+	public Result editCompanyById(Company company) {
+		Result result = new Result();
+		result.setMsg("加载成功");
+		result.setCode(CodeConstant.CODE1000);
+		Map<String, Object> params = new HashMap<>();
+		params.put("id",company.getId());
+		params.put("name",company.getName());
+		params.put("type",company.getType());
+		params.put("introduce",company.getIntroduce());
+		params.put("imgUrl",company.getImgUrl());
+		try {
+			companyDao.updateCompanyById(params);
+			result.setData(company);
+		} catch (Exception e) {
+			result.setCode(CodeConstant.CODE200);
+			result.setMsg("加载失败");
+			log.error("\r\n 编辑公司： errorcode=" + ErrorCode.geterrocode(this)+",company:"+company
+			+ "  \r\n" + e + "\r\n\r\n");
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

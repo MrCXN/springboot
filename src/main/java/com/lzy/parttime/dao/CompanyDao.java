@@ -57,4 +57,12 @@ public interface CompanyDao {
 	 */
 	Company getCompanyById(Map<String, Object> params);
 
+	/**
+	 * 
+	 * @TODO: [编辑公司]
+	 * @param params: 
+	 * @createTime:2017年10月25日下午7:05:59
+	 */
+	void updateCompanyById(Map<String, Object> params);
+
 }
